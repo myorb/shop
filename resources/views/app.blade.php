@@ -49,7 +49,6 @@
 	<!-- Angular Material style sheet -->
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
-	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2708/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body ng-app="main-App">
 	<nav class="navbar navbar-default">
@@ -67,9 +66,9 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="#/">Home</a></li>
-					<li><a href="#/items">Item</a></li>
 					<li><a href="#/products">Products</a></li>
 					<li><a href="#/vouchers">Vouchers</a></li>
+					<li><a href="#/items"><span class="glyphicon glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
 				</ul>
 			</div>
 		</div>

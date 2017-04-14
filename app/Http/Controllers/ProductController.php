@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductVoucher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,9 +29,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-    	$input = $request->all();
-        $create = Product::create($input);
-        return response($create);
+        return response(Product::create($request->all()));
     }
 
     /**
@@ -41,8 +40,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $Product = Product::find($id);
-        return response($Product);
+        return response(Product::find($id));
     }
 
     /**
@@ -56,8 +54,8 @@ class ProductController extends Controller
     	$input = $request->all();
 
         Product::where("id",$id)->update($input);
-        $Product = Product::find($id);
-        return response($Product);
+        $model = Product::find($id);
+        return response($model);
     }
 
     /**
@@ -69,5 +67,16 @@ class ProductController extends Controller
     public function destroy($id)
     {
         return Product::where('id',$id)->delete();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function postVoucher(Request $request)
+    {
+        die('ok');
+
     }
 }

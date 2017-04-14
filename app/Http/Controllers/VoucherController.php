@@ -29,8 +29,8 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
     	$input = $request->all();
-        $create = Voucher::create($input);
-        return response($create);
+        $model = Voucher::create($input);
+        return response($model);
     }
 
     /**
@@ -41,8 +41,8 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
-        $Voucher = Voucher::find($id);
-        return response($Voucher);
+        $model = Voucher::find($id);
+        return response($model);
     }
 
     /**
@@ -56,8 +56,8 @@ class VoucherController extends Controller
     	$input = $request->all();
 
         Voucher::where("id",$id)->update($input);
-        $Voucher = Voucher::find($id);
-        return response($Voucher);
+        $model = Voucher::find($id);
+        return response($model);
     }
 
     /**

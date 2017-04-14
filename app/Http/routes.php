@@ -18,6 +18,7 @@ Route::get('/', function () {
 
 Route::resource('products', 'ProductController');
 Route::resource('vouchers', 'VoucherController');
+Route::resource('pv', 'PvController');
 
 // Templates
 Route::group(array('prefix'=>'/templates/'),function(){
@@ -30,13 +31,9 @@ Route::group(array('prefix'=>'/templates/'),function(){
 });
 
 
-Route::get('test', function () {
-
-    try {
-        DB::connection()->getPdo();
-    } catch (\Exception $e) {
-        die("Could not connect to the database.  Please check your configuration.");
-    }
-
-    return 'ok';
+Route::any('add/voucher', function (Request $request) {
+    $product = \App\Product::findOrFaill($request->only(['product_id']));
+    $voucher = \App\Voucher::findOrFaill($request->only(['voucher_id']));
+    $model = \App\ProductVoucher::create($request->only(['product_id','voucher_id']));
+    return response($model);
 });

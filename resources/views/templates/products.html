@@ -13,7 +13,6 @@
 <table class="table table-bordered pagin-table">
     <thead>
     <tr>
-        <th>No</th>
         <th>Id</th>
         <th>Name</th>
         <th>Price</th>
@@ -22,13 +21,22 @@
     </thead>
     <tbody>
     <tr dir-paginate="value in data | itemsPerPage:5" total-items="totalItems">
-        <td>{{ $index + 1 }}</td>
         <td>{{ value.id }}</td>
         <td>{{ value.name }}</td>
         <td>{{ value.price }}</td>
         <td>
-            <button data-toggle="modal" ng-click="edit(value.id)" data-target="#edit-data" class="btn btn-primary">Edit</button>
-            <button ng-click="remove(value,$index)" class="btn btn-danger">Delete</button>
+            <button data-toggle="modal" ng-click="edit(value.id)" data-target="#edit-data" class="btn btn-primary">
+                <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </button>
+            <button ng-click="remove(value,$index)" class="btn btn-danger">
+                <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+            <button data-toggle="modal" ng-click="voucherOpen(value.id)" data-target="#voucher-data" class="btn btn-default">
+                <span class="glyphicon glyphicon glyphicon-gift" aria-hidden="true"></span>
+            </button>
+            <button ng-click="buy(value,$index)" class="btn btn-success">
+                <span class="glyphicon glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            </button>
         </td>
     </tr>
     </tbody>
@@ -94,6 +102,36 @@
                         </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary create-crud">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Voucher Modal -->
+<div class="modal fade" id="voucher-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="POST" name="editItem" role="form" ng-submit="voucher()">
+                <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel3">Add Voucher</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Voucher id: </strong>
+                                <div class="form-group">
+                                    <input ng-model="form.voucher_id" type="text" name="voucher_id" class="form-control" required />
+                                    <input ng-model="form.product_id" type="hidden" name="product_id" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" ng-disabled="voucherItem.$invalid" class="btn btn-primary create-crud">Submit</button>
                     </div>
                 </div>
             </form>
