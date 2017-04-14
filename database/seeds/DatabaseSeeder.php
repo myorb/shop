@@ -11,6 +11,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        DB::table('products')->insert([
+            'name' => str_random(10),
+            'price' => rand(10,100),
+        ]);
+        DB::table('products')->insert([
+            'name' => str_random(10),
+            'price' => rand(10,100),
+        ]);
+        DB::table('products')->insert([
+            'name' => str_random(10),
+            'price' => rand(10,100),
+        ]);
+        DB::table('products')->insert([
+            'name' => str_random(10),
+            'price' => rand(10,100),
+        ]);
+        DB::table('products')->insert([
+            'name' => str_random(10),
+            'price' => rand(10,100),
+        ]);
+        DB::table('products')->insert([
+            'name' => str_random(10),
+            'price' => rand(10,100),
+        ]);
+        DB::table('vouchers')->insert([
+            'start_date' => date("Y-m-d", strtotime('now')),
+            'end_date' => date("Y-m-d", strtotime('tomorrow')),
+            'discount' => '10',
+        ]);
     }
 }

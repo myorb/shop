@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 
 
-Route::resource('products', 'ItemController');
+Route::resource('products', 'ProductController');
+Route::resource('voucher', 'VoucherController');
 
 // Templates
 Route::group(array('prefix'=>'/templates/'),function(){
@@ -26,4 +27,16 @@ Route::group(array('prefix'=>'/templates/'),function(){
         View::addExtension('html','php');
         return View::make('templates.'.$template);
     }));
+});
+
+
+Route::get('test', function () {
+
+    try {
+        DB::connection()->getPdo();
+    } catch (\Exception $e) {
+        die("Could not connect to the database.  Please check your configuration.");
+    }
+
+    return 'ok';
 });

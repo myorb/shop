@@ -1,0 +1,110 @@
+projectdata:
+    image: dmitrymomot/docker-data
+    volumes:
+        - ./:/data/www:rw
+#        - ./xhprof:/data/xhprof:rw
+        - ./storage/logs:/data/logs:rw
+    command: "true"
+
+php:
+    image: dmitrymomot/php-fpm-xhprof
+    volumes_from:
+        - projectdata
+    links:
+        - db
+        - memcached
+        - redis
+    restart: always
+
+db:
+    image: mariadb
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: homestead
+        MYSQL_USER: homestead
+        MYSQL_PASSWORD: secret
+#    volumes:
+#        - ./app/database/dumps/docker:/docker-entrypoint-initdb.d
+    restart: always
+    privileged: true
+
+memcached:
+    image: memcached
+    restart: always
+
+redis:
+    image: redis
+    restart: always
+
+aplication:
+    hostname: chat.dev
+    domainname: chat.dev
+    image: dmitrymomot/nginx
+    environment:
+        VIRTUAL_HOST: chat.dev
+    volumes_from:
+        - projectdata
+    links:
+        - php:fpm
+    restart: always
+
+deps:
+    image: dmitrymomot/composer
+    command: clear-cache
+    command: update --ignore-platform-reqs -vv
+    working_dir: /data/www
+    volumes_from:
+        - projectdata
+
+migrations:
+    image: dmitrymomot/laravel-artisan
+    command: migrate --seed --env=local
+    working_dir: /data/www
+    volumes_from:
+        - projectdata
+    links:
+        - db
+        - memcached
+        - redis
+
+tests:
+    image: dmitrymomot/codeception
+    command: run api --fail-fast
+    # command: run api
+    working_dir: /data/www
+    volumes_from:
+        - projectdata
+    links:
+        - aplication
+
+apidoc:
+    image: dmitrymomot/apidoc
+    command: -v -i vendor/washe/api-v2/src/controllers/ -o public/doc/v2/
+    working_dir: /data/www
+    volumes_from:
+        - projectdata
+
+composer:
+    image: dmitrymomot/composer
+    volumes_from:
+        - projectdata
+
+artisan:
+    image: dmitrymomot/laravel-artisan
+    volumes_from:
+        - projectdata
+    links:
+        - db
+        - memcached
+        - redis
+
+pma:
+    image: dmitrymomot/pma
+    links:
+        - db:mysql
+    environment:
+        VIRTUAL_HOST: pma.chat.dev
+        MYSQL_USERNAME: root
+        MYSQL_ROOT_PASSWORD: root
+        MAX_UPLOAD: "512M"
+    restart: always

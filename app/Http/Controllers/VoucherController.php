@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Product;
+use App\Voucer;
 
-class ProductController extends Controller
+class VoucerController extends Controller
 {
 
     /**
@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $model = Product::paginate(5);
+        $model = Voucer::paginate(5);
         return response($model);
     }
 
@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
     	$input = $request->all();
-        $create = Product::create($input);
+        $create = Voucer::create($input);
         return response($create);
     }
 
@@ -41,8 +41,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $Product = Product::find($id);
-        return response($Product);
+        $Voucer = Voucer::find($id);
+        return response($Voucer);
     }
 
     /**
@@ -55,9 +55,9 @@ class ProductController extends Controller
     {
     	$input = $request->all();
 
-        Product::where("id",$id)->update($input);
-        $Product = Product::find($id);
-        return response($Product);
+        Voucer::where("id",$id)->update($input);
+        $Voucer = Voucer::find($id);
+        return response($Voucer);
     }
 
     /**
@@ -68,6 +68,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return Product::where('id',$id)->delete();
+        return Voucer::where('id',$id)->delete();
     }
 }
