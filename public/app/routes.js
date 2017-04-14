@@ -1,4 +1,4 @@
-var app =  angular.module('main-App',['ngRoute','angularUtils.directives.dirPagination']);
+var app =  angular.module('main-App',['ngRoute','angularUtils.directives.dirPagination','ngMaterial', 'ngMessages']);
 
 app.config(['$routeProvider',
     function($routeProvider) {
@@ -7,16 +7,16 @@ app.config(['$routeProvider',
                 templateUrl: 'templates/home.html',
                 controller: 'AdminController'
             }).
-            //when('/items', {
-            //    templateUrl: 'templates/items.html',
-            //    controller: 'ItemController'
-            //}).
+            when('/items', {
+                templateUrl: 'templates/items.html',
+                controller: 'ItemController'
+            }).
             when('/products', {
                 templateUrl: 'templates/products.html',
                 controller: 'ProductController'
             }).
             when('/vouchers', {
-                templateUrl: 'templates/items.html',
+                templateUrl: 'templates/vouchers.html',
                 controller: 'VoucherController'
             });
 

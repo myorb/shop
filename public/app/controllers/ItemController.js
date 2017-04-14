@@ -5,7 +5,7 @@ app.controller('AdminController', function($scope,$http){
 });
 
 app.controller('ItemController', function(dataFactory,$scope,$http){
- 
+
   $scope.data = [];
   $scope.libraryTemp = {};
   $scope.totalItemsTemp = {};
@@ -76,5 +76,5 @@ app.controller('ItemController', function(dataFactory,$scope,$http){
       });
     }
   }
-   
+
 });

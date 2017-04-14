@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Voucer;
+use App\Voucher;
 
-class VoucerController extends Controller
+class VoucherController extends Controller
 {
 
     /**
@@ -17,7 +17,7 @@ class VoucerController extends Controller
      */
     public function index(Request $request)
     {
-        $model = Voucer::paginate(5);
+        $model = Voucher::paginate(5);
         return response($model);
     }
 
@@ -29,7 +29,7 @@ class VoucerController extends Controller
     public function store(Request $request)
     {
     	$input = $request->all();
-        $create = Voucer::create($input);
+        $create = Voucher::create($input);
         return response($create);
     }
 
@@ -41,8 +41,8 @@ class VoucerController extends Controller
      */
     public function edit($id)
     {
-        $Voucer = Voucer::find($id);
-        return response($Voucer);
+        $Voucher = Voucher::find($id);
+        return response($Voucher);
     }
 
     /**
@@ -55,9 +55,9 @@ class VoucerController extends Controller
     {
     	$input = $request->all();
 
-        Voucer::where("id",$id)->update($input);
-        $Voucer = Voucer::find($id);
-        return response($Voucer);
+        Voucher::where("id",$id)->update($input);
+        $Voucher = Voucher::find($id);
+        return response($Voucher);
     }
 
     /**
@@ -68,6 +68,6 @@ class VoucerController extends Controller
      */
     public function destroy($id)
     {
-        return Voucer::where('id',$id)->delete();
+        return Voucher::where('id',$id)->delete();
     }
 }
