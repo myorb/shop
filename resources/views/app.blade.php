@@ -37,6 +37,8 @@
 
 	<!-- App Controller -->
 	<script src="{{ asset('/app/controllers/ItemController.js') }}"></script>
+	<script src="{{ asset('/app/controllers/ProductController.js') }}"></script>
+	<script src="{{ asset('/app/controllers/VoucherController.js') }}"></script>
 
 </head>
 <body ng-app="main-App">
@@ -56,6 +58,8 @@
 				<ul class="nav navbar-nav">
 					<li><a href="#/">Home</a></li>
 					<li><a href="#/items">Item</a></li>
+					<li><a href="#/products">Products</a></li>
+					<li><a href="#/vouchers">Vouchers</a></li>
 				</ul>
 			</div>
 		</div>

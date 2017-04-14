@@ -7,8 +7,17 @@ app.config(['$routeProvider',
                 templateUrl: 'templates/home.html',
                 controller: 'AdminController'
             }).
-            when('/items', {
+            //when('/items', {
+            //    templateUrl: 'templates/items.html',
+            //    controller: 'ItemController'
+            //}).
+            when('/products', {
+                templateUrl: 'templates/products.html',
+                controller: 'ProductController'
+            }).
+            when('/vouchers', {
                 templateUrl: 'templates/items.html',
-                controller: 'ItemController'
+                controller: 'VoucherController'
             });
+
 }]);
