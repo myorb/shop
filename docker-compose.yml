@@ -43,7 +43,7 @@ aplication:
 deps:
     image: dmitrymomot/composer
     command: clear-cache
-    command: update --ignore-platform-reqs -vv
+    command: update
     working_dir: /data/www
     volumes_from:
         - projectdata
