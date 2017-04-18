@@ -47,4 +47,20 @@ class CardController extends Controller
     {
         return Card::where('id',$id)->delete();
     }
+
+    /**
+     * Remove resources from storage.
+     *
+     * @return Response
+     */
+    public function buy()
+    {
+        $model = Card::all();
+        $count = 0;
+        foreach($model as $card){
+            $card->delete();
+            $count++;
+        }
+        return $count;
+    }
 }
