@@ -78,3 +78,11 @@ pma:
         MYSQL_ROOT_PASSWORD: root
         MAX_UPLOAD: "512M"
     restart: always
+
+memcached:
+    image: memcached
+    restart: always
+
+redis:
+    image: redis
+    restart: always

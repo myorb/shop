@@ -30,7 +30,7 @@ Migrations and seeds
 docker-compose run --rm migrations
 ```
 
-Done! API is availbale on this URL: http://api.shop.dev
+Done! API is availbale on this URL: http://shop.dev
 
 
 Run API tests
