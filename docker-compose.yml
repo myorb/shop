@@ -28,20 +28,12 @@ db:
     restart: always
     privileged: true
 
-memcached:
-    image: memcached
-    restart: always
-
-redis:
-    image: redis
-    restart: always
-
 aplication:
-    hostname: chat.dev
-    domainname: chat.dev
+    hostname: shop.dev
+    domainname: shop.dev
     image: dmitrymomot/nginx
     environment:
-        VIRTUAL_HOST: chat.dev
+        VIRTUAL_HOST: shop.dev
     volumes_from:
         - projectdata
     links:
@@ -67,28 +59,6 @@ migrations:
         - memcached
         - redis
 
-tests:
-    image: dmitrymomot/codeception
-    command: run api --fail-fast
-    # command: run api
-    working_dir: /data/www
-    volumes_from:
-        - projectdata
-    links:
-        - aplication
-
-apidoc:
-    image: dmitrymomot/apidoc
-    command: -v -i vendor/washe/api-v2/src/controllers/ -o public/doc/v2/
-    working_dir: /data/www
-    volumes_from:
-        - projectdata
-
-composer:
-    image: dmitrymomot/composer
-    volumes_from:
-        - projectdata
-
 artisan:
     image: dmitrymomot/laravel-artisan
     volumes_from:
@@ -103,7 +73,7 @@ pma:
     links:
         - db:mysql
     environment:
-        VIRTUAL_HOST: pma.chat.dev
+        VIRTUAL_HOST: pma.shop.dev
         MYSQL_USERNAME: root
         MYSQL_ROOT_PASSWORD: root
         MAX_UPLOAD: "512M"

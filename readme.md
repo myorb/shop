@@ -1,36 +1,61 @@
-# Install use Docker:
+# Test API
 
-1. git clone ... (clone project)
-2. docker-compose run --rm deps (install project via composer)
-3. docker-compose run -d aplication (run app)
+## Run on local machine with Docker
+
+- Install Docker and Docker Composer
+- Run next commands in terminal:
+
+And add this IP to your hosts file
+```
+0.0.0.0  api.shop.dev
+```
+
+Run nginx proxy container
+```
+docker run --name nginx-proxy --restart always -d -p 80:80 -p 443:443 -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
+```
+
+Then run API:
+```
+docker-compose run -d aplication
+```
+
+Load dependencies
+```
+docker-compose run --rm deps
+```
+
+Migrations and seeds
+```
+docker-compose run --rm migrations
+```
+
+Done! API is availbale on this URL: http://api.shop.dev
 
 
+Run API tests
+```
+docker-compose run --rm tests
+```
 
+Artisan
+```
+docker-compose run --rm artisan
+```
 
-# Laravel PHP Framework
+###PhpMyAdmin
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Run PMA daemon
+```
+docker-compose run -d pma
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
-
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+And add new host into list
+```
+0.0.0.0 pma.shop.dev
+```
+Folow link [pma.shop.dev](http://pma.shop.dev)
+```
+Login: root
+Password: root
+```
