@@ -1,3 +1,12 @@
+# Install use Docker:
+
+1. git clone ... (clone project)
+2. docker-compose run --rm deps (install project via composer)
+3. docker-compose run -d aplication (run app)
+
+
+
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
