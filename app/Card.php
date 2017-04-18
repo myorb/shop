@@ -14,16 +14,20 @@ class Card extends Model
         $this->product_name = $product->name;
         $this->product_amount = $this->countAmount($product);
         $this->discount_size = $this->countDiscount($product);
-        return $this->save();
+//        $this->save();
+        return $this;
     }
 
     private function countDiscount(Product $product)
     {
-        $model = ProductVoucher::where('product_id',$product->id)->get();
+        $model = ProductsVouchers::where('product_id','=',$product->id)->get();
         $discount = 0;
         foreach($model as $pv){
-            $da = $product->amount/100 * $pv->discount;
-            $discount += $da;
+            $voucher = $pv->voucher;
+            if($voucher){
+                $da = number_format($product->price/100*$voucher->discount,2);
+                $discount += $da;
+            }
         }
         return $discount;
     }

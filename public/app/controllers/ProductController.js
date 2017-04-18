@@ -44,7 +44,8 @@ app.controller('ProductController', function(dataFactory,$scope,$http){
     var result = confirm("Are you sure delete this item?");
    	if (result) {
       dataFactory.httpRequest('products/'+item.id,'DELETE').then(function(data) {
-          $scope.data.splice(index,1);
+        $scope.data.splice(index,1);
+        $scope.$apply();
       });
     }
   }
@@ -66,11 +67,11 @@ app.controller('ProductController', function(dataFactory,$scope,$http){
   }
 
   $scope.buy = function(item,index){
-    var result = confirm("Buy this item?");
-    if (result) {
-      dataFactory.httpRequest('products/buy/'+item.id,'PUT').then(function(data) {
+      dataFactory.httpRequest('cards','POST',{},{id:item.id}).then(function(data) {
+        console.log(data);
       });
-    }
+
+
   }
    
 });

@@ -32,9 +32,10 @@ class CardController extends Controller
     	$input = $request->all();
         if($input['id']){
             $product = Product::findOrFail($input['id']);
+            $model = (new Card)->store($product);
+            return response($model);
         }
-        $model = (new Card)->store($product);
-        return response($model);
+        return [];
     }
 
     /**
@@ -43,17 +44,7 @@ class CardController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
-    {
-        return Card::where('id',$id)->delete();
-    }
-
-    /**
-     * Remove resources from storage.
-     *
-     * @return Response
-     */
-    public function buy()
+    public function destroy($msg)
     {
         $model = Card::all();
         $count = 0;
@@ -61,6 +52,6 @@ class CardController extends Controller
             $card->delete();
             $count++;
         }
-        return $count;
+        return [$count];
     }
 }

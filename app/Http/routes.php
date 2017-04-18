@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::resource('products', 'ProductController');
 Route::resource('vouchers', 'VoucherController');
 Route::resource('pv', 'PvController');
+Route::resource('cards', 'CardController');
 
 // Templates
 Route::group(array('prefix'=>'/templates/'),function(){

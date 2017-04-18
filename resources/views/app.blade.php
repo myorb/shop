@@ -68,7 +68,7 @@
 					<li><a href="#/">Home</a></li>
 					<li><a href="#/products">Products</a></li>
 					<li><a href="#/vouchers">Vouchers</a></li>
-					<li><a href="#/items"><span class="glyphicon glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+					<li><a href="#/items">Card <span class="glyphicon glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
 				</ul>
 			</div>
 		</div>

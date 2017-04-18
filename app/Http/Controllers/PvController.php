@@ -20,8 +20,14 @@ class PvController extends Controller
      */
     public function index(Request $request)
     {
-        $model = Card::all();
-        return response($model);
+        $model = Product::find(7);
+//        $discount = 0;
+//        foreach($model as $pv){
+//            $voucher = $pv->voucher;
+//            $da = 100 * $voucher->discount;
+//            $discount += $da;
+//        }
+        return (new Card)->store($model);
     }
 
     /**
@@ -32,8 +38,8 @@ class PvController extends Controller
     public function store(Request $request)
     {
         $model = [];
-        $product = Product::findOrFail($request->only(['product_id']));
-        $voucher = Voucher::findOrFail($request->only(['voucher_id']));
+        Product::findOrFail($request->only(['product_id']));
+        Voucher::findOrFail($request->only(['voucher_id']));
         if( !ProductsVouchers::where($request->only(['product_id']))->where($request->only(['voucher_id']))->first() ){
             $model = ProductsVouchers::create($request->only(['product_id','voucher_id']));
         }

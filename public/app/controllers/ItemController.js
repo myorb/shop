@@ -7,29 +7,31 @@ app.controller('AdminController', function($scope,$http){
 app.controller('ItemController', function(dataFactory,$scope,$http){
 
   $scope.data = [];
-  $scope.libraryTemp = {};
-  $scope.totalItemsTemp = {};
-
-  $scope.totalItems = 0;
-  $scope.pageChanged = function(newPage) {
-    getResultsPage(newPage);
-  };
 
   getAllResults();
   function getAllResults() {
-    dataFactory.httpRequest('/card').then(function(data) {
-      $scope.data = data.data;
-      $scope.totalItems = data.total;
+    dataFactory.httpRequest('cards').then(function(data) {
+      console.log(data.data);
+      $scope.data = data;
     });
   }
 
-  $scope.remove = function(item,index){
-    var result = confirm("Are you sure buy this item?");
-   	if (result) {
-      dataFactory.httpRequest('card/'+item.id,'DELETE').then(function(data) {
-          $scope.data.splice(index,1);
+  $scope.pay = function(){
+    dataFactory.httpRequest('cards/true','DELETE').then(function(data) {
+        console.log(data);
+        getAllResults();
       });
+  }
+
+  $scope.getTotal = function(){
+    var total = 0;
+    for(var i = 0; i < $scope.data.length; i++){
+      var product = $scope.data[i];
+      if(product.product_amount > 0){
+        total = +total + +product.product_amount;
+      }
     }
+    return total;
   }
 
 });

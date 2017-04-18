@@ -8,28 +8,30 @@
         <table class="table table-bordered pagin-table">
             <thead>
             <tr>
-                <th>product_id</th>
-                <th>product_name</th>
-                <th>discount_size</th>
-                <th>product_amount</th>
-                <th width="220px">Action</th>
+                <!--<th>product_id</th>-->
+                <th>Product name</th>
+                <th>Discount</th>
+                <th style="width: 150px">Amount</th>
+                <!--<th width="220px">Action</th>-->
             </tr>
             </thead>
             <tbody>
             <tr dir-paginate="value in data | itemsPerPage:5" total-items="totalItems">
-
-                <td>{{ value.product_id }}</td>
+                <!--<td>{{ value.product_id }}</td>-->
                 <td>{{ value.product_name }}</td>
                 <td>{{ value.discount_size }}</td>
                 <td>{{ value.product_amount }}</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
                 <td>
-                    <button ng-click="remove(value,$index)" class="btn btn-danger">Delete</button>
+                    <button ng-click="pay()" class="btn btn-success"><strong>Total: {{ getTotal() }}</strong></button>
                 </td>
             </tr>
             </tbody>
         </table>
-
-
 
     </div>
 </div>
