@@ -24,7 +24,7 @@ class Card extends Model
         $discount = 0;
         foreach($model as $pv){
             $voucher = $pv->voucher;
-            if($voucher){
+            if($voucher && new \DateTime('now') >= new \DateTime($voucher->start_date) && new \DateTime('now') <= new \DateTime($voucher->end_date)){
                 $da = number_format($product->price/100*$voucher->discount,2);
                 $discount += $da;
             }
