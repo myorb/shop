@@ -7,40 +7,32 @@
             <button class="btn btn-success" data-toggle="modal" data-target="#create-user">Create New</button>
         </div>
     </div>
+
+    <div class="col-sm-6 col-md-3" dir-paginate="value in data | itemsPerPage:5" total-items="totalItems">
+        <div class="thumbnail">
+            <div class="caption">
+                <h3>{{ value.price }}$</h3>
+                <p> {{ value.name }}</p>
+                <p>
+                    <button data-toggle="modal" ng-click="edit(value.id)" data-target="#edit-data" class="btn btn-primary">
+                        <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </button>
+                    <button ng-click="remove(value,$index)" class="btn btn-danger">
+                        <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <button data-toggle="modal" ng-click="voucherOpen(value.id)" data-target="#voucher-data" class="btn btn-default">
+                        <span class="glyphicon glyphicon glyphicon-gift" aria-hidden="true"></span>
+                    </button>
+                    <button ng-click="buy(value,$index)" class="btn btn-success">
+                        <span class="glyphicon glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-
-<table class="table table-bordered pagin-table">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th width="220px">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr dir-paginate="value in data | itemsPerPage:5" total-items="totalItems">
-        <td>{{ value.id }}</td>
-        <td>{{ value.name }}</td>
-        <td>{{ value.price }}</td>
-        <td>
-            <button data-toggle="modal" ng-click="edit(value.id)" data-target="#edit-data" class="btn btn-primary">
-                <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            </button>
-            <button ng-click="remove(value,$index)" class="btn btn-danger">
-                <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </button>
-            <button data-toggle="modal" ng-click="voucherOpen(value.id)" data-target="#voucher-data" class="btn btn-default">
-                <span class="glyphicon glyphicon glyphicon-gift" aria-hidden="true"></span>
-            </button>
-            <button ng-click="buy(value,$index)" class="btn btn-success">
-                <span class="glyphicon glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
 <dir-pagination-controls class="pull-right" on-page-change="pageChanged(newPageNumber)" template-url="templates/dirPagination.html" ></dir-pagination-controls>
 
